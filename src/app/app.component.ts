@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {FormGroup,FormBuilder} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angularchat';
+  constructor(private httpClient:HttpClient){}
 }

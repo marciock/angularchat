@@ -1,0 +1,32 @@
+<div class="row altura"> 
+    <div class="col-sm-8">
+         <h4>Novo Usuáro</h4>
+    </div>
+    <form [formGroup]="userLogin">
+        <div class="form-group col-sm-8">
+            <label for="nome">Nome</label>
+            <input class="form-control" id="nome" type="text" formControlName="nome">
+        </div>
+        <div class="form-group col-sm-8">
+            <label for="sobrenome">Sobrnome</label>
+            <input class="form-control" id="sobrenome" type="text" formControlName="sobrenome">
+        </div>
+        <div class="form-group col-sm-8">
+            <label for="email">Email</label>
+            <input class="form-control" id="emial" type="email" formControlName="emial">
+        </div>
+        <div class="form-group col-sm-8">
+            <label for="senha">Senha</label>
+            <input class="form-control" id="senha" type="password" formControlName="senha">
+        </div>
+        <div class="form-group col-sm-8">
+            <label for="resenha">Repetir a Senha</label>
+            <input class="form-control" id="resenha" type="password" formControlName="resenha">
+        </div>
+        <div class="form-group col-sm-8 ">
+
+            <button type="button" class="btn btn-danger mr-3">Cancel</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </form>
+</div>
