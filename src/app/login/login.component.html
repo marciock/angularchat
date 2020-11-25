@@ -1,9 +1,9 @@
 <div class="card altura" >
-    
+    <form name="form" [formGroup]="loginForm" (ngSubmit)="abrir()">
     <div class="card-body">
       <h5 class="card-title">Login</h5>
       <div class="card-text">
-        <form name="form" [formGroup]="loginForm">
+      
             <div class="form-group">
                 <label for="email">Login</label>
                 <input type="email" formControlName="email" class="form-control" name="email">
@@ -12,11 +12,12 @@
                 <label for="senha">Senha</label>
                 <input type="password" formControlName="senha" class="form-control" name="senha">
             </div>
-        </form>
+      
       </div>
         <div class="float-right">
          <a href="/new_user" class="btn btn-warning mr-5" >Cadastrar novo</a>
-         <a href="#" class="btn btn-success" (click)="teste()"><span class="fa fa-send"></span></a>
+         <button  class="btn btn-success" type="submit"><span class="fa fa-send"></span></button>
         </div>
     </div>
+</form>
 </div>

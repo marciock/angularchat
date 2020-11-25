@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder} from '@angular/forms';
+import {Login} from '../../modules/login.module';
+
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,10 @@ import {FormGroup,FormBuilder} from '@angular/forms';
 export class LoginComponent implements OnInit {
   
   loginForm:FormGroup;
+ 
 
   constructor(private fb:FormBuilder){}
+  
  
   ngOnInit(): void {
     
@@ -25,8 +29,16 @@ export class LoginComponent implements OnInit {
 
     })
   }
-  teste(){
-    console.log(this.loginForm);
+  abrir(){
+
+    const lg=new Login();
+   const login=this.loginForm.value;
+   const email=login.email;
+
+   // const data=JSON.parse(localStorage.getItem('users'));
+    console.log(lg.email(email));
+    
+    
   }
   
 }
