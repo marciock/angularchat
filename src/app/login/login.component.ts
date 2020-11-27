@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup,FormBuilder} from '@angular/forms';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {Login} from '../../modules/login.module';
+import {Session} from '../../modules/session.module';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,9 +13,11 @@ import {Login} from '../../modules/login.module';
 export class LoginComponent implements OnInit {
   
   loginForm:FormGroup;
+   resultEmail:boolean=false;
+   resultSenha:boolean=false;
  
 
-  constructor(private fb:FormBuilder){}
+  constructor(private fb:FormBuilder,private router:Router){}
   
  
   ngOnInit(): void {
@@ -24,8 +28,8 @@ export class LoginComponent implements OnInit {
   }
   initializeForm():void{
     this.loginForm=this.fb.group({
-      email:'',
-      senha:''
+      email:['',Validators.required],
+      senha:['',Validators.required]
 
     })
   }
@@ -33,10 +37,24 @@ export class LoginComponent implements OnInit {
 
     const lg=new Login();
    const login=this.loginForm.value;
-   const email=login.email;
+   const email=lg.Email(login.email);
+   const senha=lg.Senha(login.senha)
 
-   // const data=JSON.parse(localStorage.getItem('users'));
-    console.log(lg.email(email));
+  // console.log(email)
+    console.log(email)
+    if(login===email){
+      this.resultEmail=true;
+      
+      
+    }
+    
+    if(senha===true){
+      this.resultSenha=true;
+      const ss=new Session(email);
+      this.router.navigate(['/chat'])
+    }
+
+   
     
     
   }

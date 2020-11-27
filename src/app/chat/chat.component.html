@@ -1,0 +1,27 @@
+<div class="container">
+
+    <form [formGroup]="chatForm">
+        <div class="form-group">
+            <label for="alias">Nome</label>
+            <input type="text" id="nome" formControlName="nome" class="form-control" readonly="false">
+        </div>
+
+        <div class="form-group border space"  >
+            <ul>
+                <li *ngFor="let content of contents">
+                    <strong>{{content.nome}} </strong><span>{{content.mensagem}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <div class="input-group-append" id="buttons-send">
+             <input type="text" id="message" formControlName="mensagem" class="form-control" aria-describedby="buttons-send" >
+           
+               <button class="btn btn-outline-success" type="button" id="send" (click)="envia()">
+                   <span class="fa fa-send"></span>
+               </button>
+            </div>
+        </div>
+    </form>
+
+</div>

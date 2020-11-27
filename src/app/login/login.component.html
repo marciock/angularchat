@@ -14,9 +14,10 @@
             </div>
       
       </div>
-        <div class="float-right">
+        <div class="float-right"  >
          <a href="/new_user" class="btn btn-warning mr-5" >Cadastrar novo</a>
-         <button  class="btn btn-success" type="submit"><span class="fa fa-send"></span></button>
+         <button  class="btn btn-success" type="submit" [disabled]="loginForm.invalid"><span class="fa fa-send"></span></button>
+         
         </div>
     </div>
 </form>

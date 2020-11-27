@@ -1,19 +1,40 @@
 export class Login{
 
-     data:any;
+     data:any[];
+    result:any;
     
      constructor(){
+
+
           this.data=JSON.parse(localStorage.getItem('users'));
-          
+          //localStorage.clear();
+         // console.log(localStorage.getItem('users'))
      }
     
-     email(field:string){
-          const email=this.data.find(({email})=>email===field );
+     Email(field:string){
+         
+               this.result=this.data.find((d)=>d.email===field );
+          
+               let email;
+         
+         if(this.result ===undefined ){
+               console.log(this.result)
+               email='';
+         }else{
+              
+          email=this.result.email;
           console.log(email);
+         }
           return email;
      }
-     senha(field:string){
-          const senha=this.data.find(({d})=>d.senha===field);
+     Senha(field:string){
+
+          let senha=false;
+         
+          if(this.result.senha===field ){
+               senha=true;
+          }
+
           return senha;
      }
 }
