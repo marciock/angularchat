@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { FormBuilder,FormGroup} from '@angular/forms';
 import {ChatService} from './chat.service';
 
@@ -13,6 +13,7 @@ export class ChatComponent implements OnInit {
 
   chatForm:FormGroup;
   contents:any[]=[];
+  //newAduio:any;
   constructor( private fb:FormBuilder,private chatService:ChatService) { }
 
   ngOnInit(): void {
@@ -40,4 +41,10 @@ export class ChatComponent implements OnInit {
     console.log(message)
     this.chatService.sendMessage(message);
   }
+   recebeAduio(valor){
+    let message={nome:this.chatForm.controls.nome.value,mensagem:'<audio src="${valor}">'};
+    this.chatService.sendMessage(message);
+    console.log(message)
+  }
+  ngAfterViewInit() { }
 }

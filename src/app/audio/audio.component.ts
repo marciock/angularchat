@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-audio',
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class AudioComponent implements OnInit {
   chunks:any[]=[];
   sound:boolean=false;
-  private mr;
+  private mr:any;
+
+  @Output() arquivo=new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -24,10 +28,26 @@ export class AudioComponent implements OnInit {
           this.mr.ondataavailable=data=>{
             this.chunks.push(data.data);
           }
+          this.mr.start();
 
           
         }
     })
+  }
+  public stopSound(){
+    this.sound=false;
+    this.mr.stop();
+    this.mr.onstop=()=>{
+      const blob=new Blob(this.chunks,{type:'audio/ogg;code=opus'});
+
+      this.chunks=[];
+      const reader=new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend=()=>{
+       // console.log(reader.result)
+        this.arquivo.emit(reader.result);
+      }
+    }
   }
 
 

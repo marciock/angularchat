@@ -1,11 +1,11 @@
 <div>
-    <div> 
-        <button class="btn btn-outline-success" id="play" type="button">
+    <div *ngIf="sound===false"> 
+        <button class="btn btn-outline-success" id="play" type="button" (click)="newSound(true)">
             <span class="fa fa-microphone"></span>
         </button>
     </div>
-    <div> 
-        <button class="btn btn-outline-success" id="play" type="button">
+    <div *ngIf="sound===true"> 
+        <button class="btn btn-outline-success" id="play" type="button" (click)="stopSound()">
             <span class="fa fa-stop"></span>
         </button>
     </div>

@@ -20,6 +20,7 @@
                <button class="btn btn-outline-success" type="button" id="send" (click)="envia()">
                    <span class="fa fa-send"></span>
                </button>
+               <app-audio (arquivo)="recebeAudio($event)"></app-audio>
             </div>
         </div>
     </form>
