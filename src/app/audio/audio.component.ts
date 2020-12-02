@@ -1,4 +1,5 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import{AudioService} from '../audio.service';
 
 
 @Component({
@@ -11,9 +12,8 @@ export class AudioComponent implements OnInit {
   sound:boolean=false;
   private mr:any;
 
-  @Output() arquivo=new EventEmitter();
-
-  constructor() { }
+  
+  constructor(private _audioService:AudioService) { }
 
   ngOnInit(): void {
   }
@@ -44,10 +44,13 @@ export class AudioComponent implements OnInit {
       const reader=new FileReader();
       reader.readAsDataURL(blob);
       reader.onloadend=()=>{
-       // console.log(reader.result)
-        this.arquivo.emit(reader.result);
+        console.log('audio')
+      // let trr=reader.result;
+      this._audioService.sendMessage(reader.result)
+        
       }
     }
+    
   }
 
 

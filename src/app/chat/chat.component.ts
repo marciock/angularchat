@@ -1,7 +1,8 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup} from '@angular/forms';
 import {ChatService} from './chat.service';
-
+import {AudioService} from '../audio.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -13,8 +14,12 @@ export class ChatComponent implements OnInit {
 
   chatForm:FormGroup;
   contents:any[]=[];
+  
   //newAduio:any;
-  constructor( private fb:FormBuilder,private chatService:ChatService) { }
+  constructor( private fb:FormBuilder,
+    private chatService:ChatService,
+    private _audioService:AudioService,
+     private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
     this.initialized();
@@ -23,6 +28,17 @@ export class ChatComponent implements OnInit {
     this.chatService.getMessage().subscribe((message:any)=>{
         console.log(message)
       this.contents.push(message);
+       this._audioService.sendAudio$.subscribe(mess=>{
+        
+        console.log(this.getSanitize(mess))
+        
+         let audio=this.getSanitize(`<audio [src]="${mess}" controls="true" class=" w-50 p-3 align-middle"></audio>`);
+       // console.log(audio);
+       let message={nome:this.chatForm.controls.nome.value ,mensagem:audio};
+        this.chatService.sendMessage(message);
+        
+      })
+     
     })
 
     
@@ -41,10 +57,10 @@ export class ChatComponent implements OnInit {
     console.log(message)
     this.chatService.sendMessage(message);
   }
-   recebeAduio(valor){
-    let message={nome:this.chatForm.controls.nome.value,mensagem:'<audio src="${valor}">'};
-    this.chatService.sendMessage(message);
-    console.log(message)
+  public getSanitize(src:string){
+   
+    return this.sanitizer.bypassSecurityTrustUrl(src)
   }
-  ngAfterViewInit() { }
+   
+  
 }

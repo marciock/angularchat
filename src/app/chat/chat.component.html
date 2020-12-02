@@ -9,7 +9,7 @@
         <div class="form-group border space"  >
             <ul>
                 <li *ngFor="let content of contents">
-                    <strong>{{content.nome}} </strong><span>{{content.mensagem}}</span>
+                    <strong>{{content.nome}} </strong><span [innerHtml]="content.mensagem"></span>
                 </li>
             </ul>
         </div>
@@ -20,7 +20,7 @@
                <button class="btn btn-outline-success" type="button" id="send" (click)="envia()">
                    <span class="fa fa-send"></span>
                </button>
-               <app-audio (arquivo)="recebeAudio($event)"></app-audio>
+               <app-audio ></app-audio>
             </div>
         </div>
     </form>
